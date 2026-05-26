@@ -10,7 +10,11 @@ Official repository and dataset release for our EMNLP 2026 paper.
 
 *Upload your overview figure to `assets/` on Hugging Face and replace `YOUR_USERNAME` and the filename in the image URL above.*
 
-[![Dataset on Hugging Face](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)]([[https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA](https://huggingface.co/datasets/hjav/What-ifTempQA)](https://huggingface.co/datasets/hjav/What-ifTempQA))
+
+[![Dataset on Hugging Face](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)](https://huggingface.co/datasets/hjav/What-ifTempQA)
+[![Open Dataset](https://img.shields.io/badge/🤗%20HuggingFace-What--ifTempQA-yellow)](https://huggingface.co/datasets/hjav/What-ifTempQA)
+[![Task](https://img.shields.io/badge/Task-Counterfactual%20Temporal%20QA-blue)](https://huggingface.co/datasets/hjav/What-ifTempQA)
+[![Size](https://img.shields.io/badge/Size-500K%20QA%20Pairs-green)](https://huggingface.co/datasets/hjav/What-ifTempQA)
 
 ---
 
