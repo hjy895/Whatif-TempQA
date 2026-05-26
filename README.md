@@ -5,9 +5,6 @@
 Official repository and dataset release for our EMNLP 2026 paper.  
 **Code will be released here soon.**
 
-<p align="center">
-  <img src="[https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA/resolve/main/assets/whatiftempqa_overview.png](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)]([https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA](https://huggingface.co/datasets/hjav/What-ifTempQA))" alt="What-ifTempQA: counterfactual temporal coverage across historical timelines (1900–2025)" width="900"/>
-</p>
 
 <p align="center"><i>Counterfactual temporal coverage across historical timelines.</i></p>
 
