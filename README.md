@@ -26,7 +26,7 @@ The dataset targets a failure mode we call **timeline hallucination**: models an
 | **Size** | **500,231** question–answer pairs |
 | **Batches** | 21 CSV files (`whatif_batch_001.csv` … `whatif_batch_021.csv`) |
 | **Question types** | **16** counterfactual families in **4** taxonomy pillars |
-| **Knowledge base** | 82 curated historical events (~1879–2024) |
+| **Knowledge base** | Multiple curated historical events (~1900–2025) |
 | **Verification** | Deterministic answer engine + duplicate filtering (`curated_verified`) |
 | **Code** | **Coming soon** in this repository |
 
