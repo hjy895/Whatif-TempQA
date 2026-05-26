@@ -1,5 +1,4 @@
 <img width="2487" height="1129" alt="Main figure 1-1" src="https://github.com/user-attachments/assets/46715cd5-9f07-4e4c-89e4-0e93a8ae0635" />
-# What-ifTempQA
 
 ### *What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations*
 
@@ -7,14 +6,14 @@ Official repository and dataset release for our EMNLP 2026 paper.
 **Code will be released here soon.**
 
 <p align="center">
-  <img src="[https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA/resolve/main/assets/whatiftempqa_overview.png](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)](https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA)" alt="What-ifTempQA: counterfactual temporal coverage across historical timelines (1900–2025)" width="900"/>
+  <img src="[https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA/resolve/main/assets/whatiftempqa_overview.png](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)]([https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA](https://huggingface.co/datasets/hjav/What-ifTempQA))" alt="What-ifTempQA: counterfactual temporal coverage across historical timelines (1900–2025)" width="900"/>
 </p>
 
 <p align="center"><i>Counterfactual temporal coverage across historical timelines.</i></p>
 
 *Upload your overview figure to `assets/` on Hugging Face and replace `YOUR_USERNAME` and the filename in the image URL above.*
 
-[![Dataset on Hugging Face](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)](https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA)
+[![Dataset on Hugging Face](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)]([https://huggingface.co/datasets/YOUR_USERNAME/What-ifTempQA](https://huggingface.co/datasets/hjav/What-ifTempQA))
 
 ---
 
