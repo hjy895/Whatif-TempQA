@@ -10,7 +10,7 @@
 - **Coverage**: Spans events from approximately 1900 to 2025
 - **Diversity**: Covers events, entities, and timelines across multiple domains
 - **Complexity**: 16 distinct counterfactual question types organised into 4 families
-- **Multi-hop**: Supports complex multi-hop inferential reasoning tasks
+- **Multi-hop**: Supports complex multi-hop inferential reasoning
 - **Verified Labels**: Deterministic answer engine with independent verification
 
 ## Question Types
