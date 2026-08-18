@@ -128,7 +128,6 @@ If you use this dataset in your research, please cite:
 ```bibtex
 @inproceedings{whatiftempqa2026,
   title={What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations},
-  author={Javed, Haseeb and Muhammad, Khan and Oh, Hayoung and Ali, Farman},
   year={2026}
 }
 ```
