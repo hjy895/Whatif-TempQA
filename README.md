@@ -1,170 +1,138 @@
-<img width="2487" height="1129" alt="Main figure 1-1" src="https://github.com/user-attachments/assets/46715cd5-9f07-4e4c-89e4-0e93a8ae0635" />
+# What-ifTempQA
 
-### *What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations*
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
 
-Official repository and dataset release for our EMNLP 2026 paper.  
-**Code will be released here soon.**
+**What-ifTempQA** is a large-scale counterfactual temporal question answering benchmark containing **500K+** verified question-answer pairs designed to evaluate temporal reasoning capabilities in large language models.
 
+## Key Features
 
-<p align="center"><i>Counterfactual temporal coverage across historical timelines.</i></p>
+- **Scale**: 500,231 high-quality counterfactual temporal QA pairs
+- **Coverage**: Spans events from approximately 1900 to 2025
+- **Diversity**: Covers events, entities, and timelines across multiple domains
+- **Complexity**: 16 distinct counterfactual question types organised into 4 families
+- **Multi-hop**: Supports complex multi-hop inferential reasoning tasks
+- **Verified Labels**: Deterministic answer engine with independent verification
 
-*Upload your overview figure to `assets/` on Hugging Face and replace `YOUR_USERNAME` and the filename in the image URL above.*
+## Question Types
 
+| **Timeline Shifts** | **Ordering & State** | **Quantification** | **Dependencies & Bounds** |
+|---------------------|----------------------|--------------------|---------------------------|
+| Attribute           | Comparison           | Counting           | Science Dependency        |
+| Duration            | Time Reordering      | Causal Reasoning   | Technology Dependency     |
+| Delay               | Entity State         | Recursive Time     | Impossible Time           |
+| Cancellation        | Role Shift           | Multihop           | Historical Alternative    |
 
-[![Dataset on Hugging Face](https://huggingface.co/datasets/huggingface/badges/resolve/main/dataset-on-hf-md.svg)](https://huggingface.co/datasets/hjav/What-ifTempQA)
-[![Open Dataset](https://img.shields.io/badge/🤗%20HuggingFace-What--ifTempQA-yellow)](https://huggingface.co/datasets/hjav/What-ifTempQA)
-[![Task](https://img.shields.io/badge/Task-Counterfactual%20Temporal%20QA-blue)](https://huggingface.co/datasets/hjav/What-ifTempQA)
-[![Size](https://img.shields.io/badge/Size-500K%20QA%20Pairs-green)](https://huggingface.co/datasets/hjav/What-ifTempQA)
-
----
-
-## About
-
-**What-ifTempQA** is a large-scale benchmark for **counterfactual temporal question answering**. Every item embeds an explicit hypothetical edit in the question—*If X were delayed until Y…*, *Suppose X did not occur in Z…*—and provides a **verified** gold answer on the **revised** timeline.
-
-The dataset targets a failure mode we call **timeline hallucination**: models answer as if the real world still holds, even when the question states a clear alternative calendar. What-ifTempQA complements factual temporal QA corpora by measuring whether LLMs can **reason under stated hypotheticals**, not only recall when events occurred.
-
-| | |
-|---|---|
-| **Paper** | *What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations* |
-| **Size** | **500,231** question–answer pairs |
-| **Batches** | 21 CSV files (`whatif_batch_001.csv` … `whatif_batch_021.csv`) |
-| **Question types** | **16** counterfactual families in **4** taxonomy pillars |
-| **Knowledge base** | Multiple curated historical events (~1900–2025) |
-| **Verification** | Deterministic answer engine + duplicate filtering (`curated_verified`) |
-| **Code** | **Coming soon** in this repository |
-
----
-
-## Main contributions
-
-1. **Half-million scale** counterfactual temporal QA with template-verified gold labels.  
-2. **16-type taxonomy** covering timeline shifts, ordering/state, quantification, and cross-event dependencies.  
-3. **Hallucination-oriented metadata** (`hallucination_target`, `perturbation_type`) for fine-grained error analysis.  
-4. **Baseline evaluation** of LLaMA-2, LLaMA-3, Mistral-Instruct, and Gemma models showing large gaps on quantification and aggregate-answer items.
-
----
-
-## Taxonomy (Figure 2)
-
-| Pillar | Question types |
-|--------|----------------|
-| **Timeline shift** | Attribute, Duration, Delay, Cancellation |
-| **Ordering & state** | Comparison, Time Reordering, Entity State, Role Shift |
-| **Quantification** | Counting, Causal Reasoning, Recursive Time, Multihop |
-| **Dependency & bounds** | Science Dependency, Technology Dependency, Historical Alternative, Impossible Time |
-
----
-
-## Example
-
-**Question:** If Olympic Games Munich were delayed until 1976, how many events among Olympic Games Munich and Berlin Wall Construction occur on or before 1975?
-
-**Answer:** `1`
-
-Berlin Wall Construction (1961) counts on the revised timeline; shifted Munich (1976) does not.
-
-| Question | Answer | Type |
-|----------|--------|------|
-| If Fall of Berlin Wall moved from 1989 to 2015, what is the shift size in years? | 26 | `counterfactual_attribute` |
-| If Moon Landing occurred in 1977 rather than 1969, which is earlier: Sputnik Launch (1957) or Moon Landing? | Sputnik Launch | `counterfactual_comparison` |
-| If Olympic Games Munich were delayed from 1972 to 1976, what is the revised year of Olympic Games Munich? | 1976 | `counterfactual_delay` |
-
----
-
-## Data format
-
-Each row is a self-contained CSV record. Core fields:
-
-| Field | Description |
-|-------|-------------|
-| `question` | Natural-language item with counterfactual premise |
-| `answer` | Verified gold label on the revised timeline |
-| `question_type` | One of 16 `counterfactual_*` labels |
-| `answer_form` | `year`, `count`, `entity_name`, `yes_no`, `before_after`, `duration`, … |
-| `difficulty` | 1–5 (shift magnitude) |
-| `hop_count` | Reasoning depth (typically 2–4) |
-| `domain` | e.g., `science`, `military`, `culture` |
-| `perturbation_type` | `delay`, `cancellation`, `failure`, `compound` |
-| `hallucination_target` | Expected failure mode if premise is ignored |
-| `entities_question` | JSON list of referenced event names |
-| `time_span_start` / `time_span_end` | Bounding window for referenced years |
-| `source_type` | `curated_verified` for the v5 release |
-
-Full schema: [`data/schema.json`](data/schema.json).
-
----
-
-## Download
-
-### Hugging Face (recommended)
-
-```python
-from datasets import load_dataset
-
-ds = load_dataset("YOUR_USERNAME/What-ifTempQA")
-print(ds["train"][0])
-```
-
-Replace `YOUR_USERNAME` after the dataset is published.
-
-### Local release
-
-Verified v5 files: **`data/generated_v5/`**
-
-> Do not use `data/generated/` or other older folders—those runs contain heavy duplication.
-
----
-
-## Repository layout
+## Repository Structure
 
 ```
-What-iFTempQA/
-├── README.md                 # this file
-├── data/
-│   ├── generated_v5/         # release CSVs (500,231 rows)
-│   ├── schema.json
-│   └── events_curated.json
-├── figures/                  # paper figures
-├── data_generation/          # generation & verification (code coming soon)
-├── core/
+What-ifTempQA/
+├── README.md
+├── requirements.txt
+├── LICENSE
+├── setup.py
+├── .gitignore
 ├── src/
-└── scripts/
+│   ├── main_generator.py          # Dataset generation entry point
+│   ├── main_evaluator.py          # Model evaluation entry point
+│   ├── data_generation/           # Dataset generation modules
+│   │   ├── __init__.py
+│   │   ├── core_generator.py      # Core generator
+│   │   ├── knowledge_base.py      # Historical knowledge base
+│   │   ├── question_types.py      # Question type definitions
+│   │   ├── templates.py           # Question templates
+│   │   └── validators.py          # Quality validators
+│   ├── evaluation/                # Evaluation modules
+│   │   ├── evaluator.py           # Main evaluator
+│   │   ├── model_manager.py       # Model loading/inference
+│   │   ├── metrics.py             # Evaluation metrics
+│   │   ├── prompt_builder.py      # Few-shot prompt construction
+│   │   └── result_analyzer.py     # Result analysis and reporting
+│   └── utils/                     # Utility modules
+│       ├── __init__.py
+│       ├── config.py              # Configuration classes
+│       ├── file_utils.py          # File I/O helpers
+│       └── logging_utils.py       # Logging setup
+├── data/
+│   ├── sample_data.csv            # Sample dataset for testing
+│   └── schema.json                # Dataset schema
+├── samples/                       # Sample batch files
+│   ├── temporal_qa_batch_1.csv
+│   ├── temporal_qa_batch_2.csv
+│   └── temporal_qa_batch_3.csv
+└── tests/
+    ├── __init__.py
+    └── test_generation.py         # Unit tests
 ```
 
----
+## Installation
 
-## Evaluation metrics
-
-We report **Precision**, **Recall**, **F1**, **Answer Containment (C)**, and **Exact Match (EM)**. EM is especially important for counterfactual QA: it penalizes correct-sounding answers that use the **factual** instead of the **hypothetical** timeline.
-
-Evaluation scripts will be added when code is released.
-
----
-
-## Citation
-
-If you use What-ifTempQA, please cite:
-
-```bibtex
-@inproceedings{whatiftempqa2026,
-  title     = {What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations},
-  author    = {TODO},
-  booktitle = {Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing (EMNLP)},
-  year      = {2026}
-}
+```bash
+git clone https://github.com/hjy895/whatif-Tempqa.git
+cd whatif-Tempqa
+pip install -r requirements.txt
 ```
 
----
+## Usage
+
+### Generate Dataset
+
+```bash
+python src/main_generator.py --output_dir data/generated --num_batches 5 --verbose
+```
+
+### Evaluate Models
+
+```bash
+python src/main_evaluator.py --dataset data/sample_data.csv --output_dir results --sample_size 50 --max_shots 3
+```
+
+### Run Tests
+
+```bash
+pytest tests/ -v
+```
+
+## Dataset Access
+
+The full dataset is available on Hugging Face: [hjav/What-ifTempQA](https://huggingface.co/datasets/hjav/What-ifTempQA)
+
+Sample batch files are included in the `/samples` directory for quick experimentation.
+
+## Dataset Statistics
+
+| Metric | Value |
+|--------|-------|
+| **Total Questions** | 500,231 |
+| **Question Types** | 16 Categories |
+| **Time Range** | 1900–2025 |
+| **Domains** | History, Science, Technology, Politics, Culture |
+| **Language** | English |
+| **Format** | CSV |
+
+## Evaluation Metrics
+
+- **Precision (P)**: Token-level precision
+- **Recall (R)**: Token-level recall
+- **F1 Score**: Harmonic mean of precision and recall
+- **Containment (C)**: Whether the key answer token appears in the output
+- **Exact Match (EM)**: Full normalised match to the gold answer
 
 ## License
 
-TODO: Add license (e.g., CC BY 4.0).
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
----
+## Citation
 
-## Contact
+If you use this dataset in your research, please cite:
 
-For questions or issues, open a GitHub issue or contact the authors listed in the paper.
+```bibtex
+@inproceedings{whatiftempqa2026,
+  title={What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations},
+  author={Javed, Haseeb and Muhammad, Khan and Oh, Hayoung and Ali, Farman},
+  year={2026}
+}
+```
 
-**Paper:** *What-ifTempQA: A Half-Million Benchmark for Counterfactual Temporal QA and LLM Timeline Hallucinations* (EMNLP 2026).
+## Contributing
+
+Contributions are welcome. Please open an issue or submit a pull request.
